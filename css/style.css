@@ -772,13 +772,13 @@ p {
 .l-editor-card {
   display: grid;
   grid-template-columns: 100px 1fr; }
-  @media (min-width: 1200px) {
-    .l-editor-card {
-      grid-template-columns: 100px 1fr 150px; } }
   .l-editor-card__img-side {
     width: 100%;
     height: 100%;
     object-fit: cover; }
+  .l-editor-card__content {
+    display: grid;
+    grid-template-columns: 1fr 200px; }
   .l-editor-card .person-float {
     margin: 0;
     margin-bottom: 2rem; }
@@ -792,7 +792,6 @@ p {
       .l-editor-card__right {
         margin: 0;
         grid-column: initial;
-        padding-left: 1rem;
         height: 100%;
         display: flex;
         flex-direction: column;
