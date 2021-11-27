@@ -122,7 +122,7 @@ $(function(){
 /* Dev */
 
 $('body').append(`
-    <a href="links" class="btn btn--primary" style="position: fixed; bottom: 2rem; right: 1rem;">Ver Links</a>
+    <a href="links.html" class="btn btn--primary" style="position: fixed; bottom: 2rem; right: 1rem;">Ver Links</a>
 `)
 
 /* Dev */
