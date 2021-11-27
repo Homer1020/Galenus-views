@@ -312,6 +312,8 @@ p {
     .card__text--clp {
       display: none;
       font-size: 12px; }
+    .card__text--center {
+      text-align: center; }
   .card__img {
     width: 100%; }
   .card__list {
@@ -466,7 +468,11 @@ p {
     background: #fff;
     clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% 100%, 0 100%);
     font-size: 14px;
-    margin-top: 1rem; }
+    margin-top: 1rem;
+    max-width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden; }
     .breadcrumb__link:not(:first-child) {
       clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% 100%, var(--cut) 100%);
       padding: 1rem calc(1rem + var(--cut)); }
@@ -614,7 +620,7 @@ p {
   gap: 4rem;
   align-items: start; }
   .l-sub-nav p {
-    margin-top: 1rem; }
+    margin-top: .5rem; }
   .l-sub-nav__buttons {
     display: grid;
     gap: 2rem;
@@ -822,5 +828,13 @@ p {
   .basic-article__title {
     font-size: 24px;
     margin-bottom: 1.75rem; }
-  .basic-article p {
-    margin: 1rem 0; }
+  .basic-article p,
+  .basic-article img {
+    margin: 1.5rem 0; }
+
+.sl-overlay {
+  background-color: #000; }
+
+.sl-wrapper .sl-navigation button,
+.sl-wrapper .sl-close {
+  color: #fff; }

@@ -108,6 +108,15 @@ $(function(){
             }
         }
     });
+
+
+    var lightbox = new SimpleLightbox('.lightbox a', {
+        nav: true,
+        animationSpeed: 100,
+        scrollZoom: false,
+        captionSelector: 'self',
+        captionType: 'title'
+    });
 });
 
 /* Dev */
