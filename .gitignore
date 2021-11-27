@@ -2,3 +2,4 @@ node_modules/
 scss/
 package.json
 package-lock.json
+css/min/
