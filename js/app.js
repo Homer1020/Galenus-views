@@ -117,6 +117,15 @@ $(function(){
         captionSelector: 'self',
         captionType: 'title'
     });
+
+    // Autores al inicio en responsive
+    function authorInStart() {
+        if(matchMedia('(max-width: 768px)').matches) {
+            $('.person-float').insertAfter('.card__body h2');
+        }
+    }
+
+    authorInStart();
 });
 
 /* Dev */
