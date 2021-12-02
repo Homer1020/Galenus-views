@@ -120,7 +120,7 @@ $(function(){
 
     // Autores al inicio en responsive
     function authorInStart() {
-        if(matchMedia('(max-width: 768px)').matches) {
+        if(matchMedia('(max-width: 1200px)').matches) {
             $('.person-float').insertAfter('.card__body h2');
         }
     }
