@@ -682,6 +682,67 @@ p {
   border-bottom: 1px solid #e6e6e6;
   padding: 2rem 0; }
 
+/* Modal */
+.modal {
+  width: 1000px;
+  max-width: 90%;
+  transform: translateY(-50px);
+  transition: transform .3s; }
+  .modal__close {
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    padding: 0;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    transform: translateX(50%); }
+    .modal__close:hover {
+      background-color: rgba(255, 255, 255, 0.2); }
+  .modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s, visibility .3s; }
+    .modal__overlay.show {
+      opacity: 1;
+      visibility: visible; }
+      .modal__overlay.show .modal {
+        transform: translateY(0); }
+  .modal__card {
+    margin: 0; }
+    .modal__card .card__body {
+      padding: 3rem 4rem;
+      overflow: auto;
+      max-height: 60vh; }
+      @media (min-height: 1000px) {
+        .modal__card .card__body {
+          max-height: 80vh; } }
+    .modal__card .card__header {
+      background-color: var(--color-primary);
+      color: white;
+      text-transform: uppercase;
+      padding: 1rem 4rem;
+      font-weight: normal;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+    .modal__card .card__title {
+      font-size: 2.8rem; }
+  .modal .m-desc p {
+    color: #222;
+    margin: 1rem 0;
+    text-align: justify; }
+
 /* Layout */
 /* Container */
 .container {
@@ -779,6 +840,14 @@ p {
 .l-editor-card {
   display: grid;
   grid-template-columns: 1fr; }
+  .l-editor-card__header {
+    grid-column: 1 / 3;
+    padding: 20px;
+    background-color: #fff; }
+    .l-editor-card__header ~ .l-editor-card__content .card__body {
+      padding-top: 0; }
+    .l-editor-card__header ~ .l-editor-card__content .l-editor-card__right {
+      padding-top: 0; }
   @media (min-width: 768px) {
     .l-editor-card {
       grid-template-columns: 100px 1fr; } }
@@ -802,7 +871,8 @@ p {
   .l-editor-card__right {
     text-align: center;
     grid-column: 1 / 3;
-    margin-top: 2rem; }
+    margin-top: 2rem;
+    padding: 6rem 2rem; }
     @media (min-width: 1200px) {
       .l-editor-card__right {
         margin: 0;
@@ -891,6 +961,9 @@ p {
 .t-small {
   font-size: 14px; }
 
+.t-medium {
+  font-size: 18px; }
+
 .t-lighter {
   font-weight: lighter; }
 
@@ -911,6 +984,15 @@ p {
 
 .t-page-title {
   font-size: 3.5rem; }
+
+.t-page-top-title,
+.t-page-bottom-title {
+  margin: .7rem 0; }
+
+.t-page-bottom-title {
+  font-size: 2rem;
+  font-style: italic;
+  margin-bottom: 1.5rem; }
 
 .t-page-desc {
   font-size: 2.4rem;
@@ -952,6 +1034,9 @@ p {
 .mb-0 {
   margin-bottom: 0; }
 
+.m-0 {
+  margin: 0; }
+
 /* Simple Lightbox */
 .sl-overlay {
   background-color: #000; }
@@ -963,3 +1048,72 @@ p {
 /* Floats */
 .clear-both {
   clear: both; }
+
+/* Calendar casí una utilidad */
+.calendar__header {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .calendar__header button {
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    border-radius: 50%;
+    padding: 0;
+    color: var(--color-primary);
+    border: none;
+    cursor: pointer; }
+    @media (max-width: 667px) {
+      .calendar__header button {
+        width: 30px;
+        height: 30px;
+        font-size: 16px; } }
+
+.calendar__meta {
+  font-size: 3.5rem; }
+  .calendar__meta span {
+    font-weight: normal; }
+  @media (max-width: 667px) {
+    .calendar__meta {
+      font-size: 2rem; } }
+
+.calendar__content {
+  overflow: auto;
+  border: 1px solid #ccc; }
+  .calendar__content ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); }
+    .calendar__content ol li:not(.calendar__week) {
+      min-height: 150px;
+      background-color: #f5f5f5;
+      padding: 1rem;
+      outline: 1px solid #ccc; }
+    .calendar__content ol li:nth-child(7n + 8):not(.calendar__week):not(.not-in-this-month) {
+      background-color: #ccd1ff;
+      outline-color: #a8b1ff; }
+
+.calendar__week {
+  text-align: center;
+  font-weight: bold;
+  padding: 1rem 0.5rem;
+  font-size: 19px;
+  background-color: #eee;
+  color: #333; }
+
+.calendar .not-in-this-month {
+  background-color: #e6e6e6 !important; }
+
+.calendar__action {
+  padding: 1rem;
+  font-size: 14px;
+  border-radius: 3px;
+  display: block;
+  margin: 1rem 0;
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer; }

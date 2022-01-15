@@ -130,8 +130,60 @@ $(function(){
 
 /* Dev */
 
-$('body').append(`
-    <a href="links.html" class="btn btn--primary" style="position: fixed; bottom: 2rem; right: 1rem;">Ver Links</a>
-`)
+/* Modal */
+class Modal {
+    constructor({ selector, toShowSelector }) {
+        this.modal = document.querySelector(selector);
+        this.toShowSelector = toShowSelector ? document.querySelector(toShowSelector) : null;
+        this.bindEvents();
+        this.events();
+    }
+    bindEvents() {
+        this.showModal = this.showModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.setBodyOverflow = this.setBodyOverflow.bind(this);
+    }
+    events() {
+        if(this.toShowSelector) {
+            this.toShowSelector.addEventListener('click', this.showModal);
+        }
+        this.modal.addEventListener('click', this.closeModal);
+    }
+    showModal(e) {
+        if(e.target.classList.contains('calendar__action')) {
+            const title = e.target.dataset.title || 'Hola mamá';
+            const description = e.target.dataset.description || 'Una descripción cualquiera';
+            const date = e.target.dataset.date || '00/00/00';
 
-/* Dev */
+            this.modal.querySelector('.m-title').textContent = title;
+            this.modal.querySelector('.m-desc').innerHTML = description;
+            this.modal.querySelector('.m-date').textContent = date;
+
+            this.modal.classList.add('show');
+            this.setBodyOverflow();
+        }
+    }
+    closeModal(e) {
+        if(
+            e.target.classList.contains('modal__overlay') || 
+            e.target.parentElement.classList.contains('modal__close') ||
+            e.target.classList.contains('modal__close')
+        ) {
+            this.modal.classList.remove('show');
+            this.setBodyOverflow();
+        }
+    }
+    setBodyOverflow() {
+        if(this.modal.classList.contains('show')) {
+            return document.body.style.overflow = 'hidden';
+        }
+        document.body.style.overflow = '';
+    }
+}
+
+if(document.querySelector('#modal')) {
+    new Modal({
+        selector: '#modal',
+        toShowSelector: '.calendar'
+    });
+}
