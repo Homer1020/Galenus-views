@@ -65,11 +65,19 @@ $(function(){
     });
 
     $('.side-nav__item--drop').on('click', function(e) {
-        e.preventDefault();
+        //e.preventDefault();
 
-        $(e.target).toggleClass('active');
+        //$(e.target).toggleClass('active');
 
-        $(e.target.parentElement.querySelector('.side-nav__dropdown')).slideToggle();
+        //$(e.target.parentElement.querySelector('.side-nav__dropdown')).slideToggle();
+        if(
+            $(e.target).hasClass('side-nav__item--drop')
+            || $(e.target).parent().hasClass('side-nav__item--drop')
+          ) {
+            e.preventDefault();
+            $(e.target).toggleClass('active');    
+            $(e.target.parentElement.querySelector('.side-nav__dropdown')).slideToggle();
+        }
     });
 
     if(!isMovil()) {
@@ -102,9 +110,39 @@ $(function(){
                 const imgs = tg.parent().find('img');
 
                 $('.gallery-print__view').html(`
-                    <img src="${imgs[0].src}" alt="Página 1" />
-                    <img src="${imgs[1].src}" alt="Página 2" />
+                    <img src="${imgs[0].dataset.img}" alt="Página 1" />
+                    <img src="${imgs[1].dataset.img}" alt="Página 2" />
                 `);
+            }
+        }
+    });
+
+    $('.gallery-print__arrows').on('click', function(e) {
+        if(matchMedia('(min-width: 768px)').matches) {
+            const tg = $(e.target);
+            if(tg.hasClass('arrow')) {
+                const parent = tg.parent().parent();
+                const current = parent.find('.gallery-print__view img')[0];
+                const currentSlide = parent.find(`.gallery-print__slider img[data-img="${current.getAttribute('src')}"]`).parent().parent();
+                if(tg.hasClass('next')) {
+                    const imgs = currentSlide.next().find('img');
+
+                    if(imgs.length !== 0) {
+                        $('.gallery-print__view').html(`
+                            <img src="${imgs[0].dataset.img}" alt="Página 1" />
+                            <img src="${imgs[1].dataset.img}" alt="Página 2" />
+                        `); 
+                    }
+
+                }else {
+                    const imgs = currentSlide.prev().find('img');
+                    if(imgs.length !== 0) {
+                        $('.gallery-print__view').html(`
+                            <img src="${imgs[0].dataset.img}" alt="Página 1" />
+                            <img src="${imgs[1].dataset.img}" alt="Página 2" />
+                        `); 
+                    }
+                }
             }
         }
     });
@@ -151,10 +189,14 @@ class Modal {
     }
     showModal(e) {
         if(e.target.classList.contains('calendar__action')) {
-            const title = e.target.dataset.title || 'Hola mamá';
-            const description = e.target.dataset.description || 'Una descripción cualquiera';
+            const bg = e.target.dataset.bg || 'bg-gcpuertorico';
+            const title = e.target.dataset.title || 'Evento no encontrado';
+            const description = e.target.dataset.description || '';
             const date = e.target.dataset.date || '00/00/00';
 
+            $("#modal_Header").removeAttr('class');
+            $("#modal_Header").addClass( "card__header " + bg);
+            
             this.modal.querySelector('.m-title').textContent = title;
             this.modal.querySelector('.m-desc').innerHTML = description;
             this.modal.querySelector('.m-date').textContent = date;
