@@ -1,4 +1,3 @@
-// Función que dectecta si estás en movil
 function isMovil() {
     let result = false;
     if( navigator.userAgent.match(/Android/i)
@@ -108,10 +107,18 @@ $(function(){
 
             if(tg.prop('tagName') === 'IMG') {
                 const imgs = tg.parent().find('img');
+                const pdf1 = imgs[0].dataset.pdf;
+                const pdf2 = imgs[1].dataset.pdf;
 
                 $('.gallery-print__view').html(`
-                    <img src="${imgs[0].dataset.img}" alt="Página 1" />
-                    <img src="${imgs[1].dataset.img}" alt="Página 2" />
+                    <div>
+                        <img src="${imgs[0].dataset.img}" alt="Página 1"/>
+                        ${ pdf1 ? `<div class="tpdf"><a href="${pdf1}" download><img src="/img/download.png"></a></div>` : '' }
+                    </div>
+                    <div>
+                        <img src="${imgs[1].dataset.img}" alt="Página 2" />
+                        ${ pdf2 ? `<div class="tpdf"><a href="${pdf2}" download><img src="/img/download.png"></a></div>` : '' }
+                    </div>
                 `);
             }
         }
@@ -126,21 +133,38 @@ $(function(){
                 const currentSlide = parent.find(`.gallery-print__slider img[data-img="${current.getAttribute('src')}"]`).parent().parent();
                 if(tg.hasClass('next')) {
                     const imgs = currentSlide.next().find('img');
+                    const pdf1 = imgs[0].dataset.pdf;
+                    const pdf2 = imgs[1].dataset.pdf;
 
                     if(imgs.length !== 0) {
                         $('.gallery-print__view').html(`
-                            <img src="${imgs[0].dataset.img}" alt="Página 1" />
-                            <img src="${imgs[1].dataset.img}" alt="Página 2" />
-                        `); 
+                            <div>
+                                <img src="${imgs[0].dataset.img}" alt="Página 1"/>
+                                ${ pdf1 ? `<div class="tpdf"><a href="${pdf1}" download><img src="/img/download.png"></a></div>` : '' }
+                            </div>
+                            <div>
+                                <img src="${imgs[1].dataset.img}" alt="Página 2" />
+                                ${ pdf2 ? `<div class="tpdf"><a href="${pdf2}" download><img src="/img/download.png"></a></div>` : '' }
+                            </div>
+                        `);
                     }
 
                 }else {
                     const imgs = currentSlide.prev().find('img');
+                    const pdf1 = imgs[0].dataset.pdf;
+                    const pdf2 = imgs[1].dataset.pdf;
+                    
                     if(imgs.length !== 0) {
                         $('.gallery-print__view').html(`
-                            <img src="${imgs[0].dataset.img}" alt="Página 1" />
-                            <img src="${imgs[1].dataset.img}" alt="Página 2" />
-                        `); 
+                            <div>
+                                <img src="${imgs[0].dataset.img}" alt="Página 1"/>
+                                ${ pdf1 ? `<div class="tpdf"><a href="${pdf1}"><img src="img/download.png"></a></div>` : '' }
+                            </div>
+                            <div>
+                                <img src="${imgs[1].dataset.img}" alt="Página 2" />
+                                ${ pdf2 ? `<div class="tpdf"><a href="${pdf2}"><img src="img/download.png"></a></div>` : '' }
+                            </div>
+                        `);
                     }
                 }
             }
