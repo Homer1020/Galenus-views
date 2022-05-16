@@ -1,0 +1,25 @@
+.result-item {
+  text-align: justify;
+  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 2rem; }
+  .result-item a {
+    color: var(--color-primary); }
+  .result-item:not(:first-child) {
+    margin-top: 3rem; }
+
+.result-pagination {
+  margin: 2rem 0; }
+  .result-pagination__menu {
+    display: flex;
+    list-style: none; }
+  .result-pagination__item {
+    display: inline-block;
+    border-left: 1px solid #bbb;
+    padding: 0 1rem; }
+    .result-pagination__item:last-child {
+      border-right: 1px solid #bbb; }
+    .result-pagination__item a {
+      color: var(--color-primary); }
+    .result-pagination__item.active, .result-pagination__item:hover,
+    .result-pagination__item a.active {
+      color: #000 !important; }
